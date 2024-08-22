@@ -159,7 +159,7 @@ class UnleashClient extends EventEmitter {
       context.sessionId = sessionId;
     }
 
-    final togglesInStorage = await _fetchTogglesFromStorage();
+    final togglesInStorage = await fetchTogglesFromStorage();
     final bootstrap = this.bootstrap;
     if (bootstrap != null && bootstrapOverride) {
       toggles = bootstrap;
@@ -242,7 +242,8 @@ class UnleashClient extends EventEmitter {
     }
   }
 
-  Future<Map<String, ToggleConfig>> _fetchTogglesFromStorage() async {
+  /// Fetches the currently saved toggles from the configured storage
+  Future<Map<String, ToggleConfig>> fetchTogglesFromStorage() async {
     try {
       final toggles =
           await actualStorageProvider.get(storageWithApp(appName, storageKey));
